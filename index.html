@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Curson Blob animation</title>
+</head>
+
+<body>
+    <div id="cursorBlob"></div>
+    <div class="wrap">
+        <ul class="nav">
+            <li class="nav__link">About Us</li>
+            <li class="nav__link">Why Us</li>
+            <li class="nav__link">Contact Us</li>
+        </ul>
+    </div>
+    <script>
+        const blobCursor = (() => {
+            const CURSOR = document.querySelector("#cursorBlob");
+            const LINKS = document.querySelectorAll(".nav__link");
+            const setCursorPos = (e) => {
+                const { pageX: posX, pageY: posY } = e;
+                CURSOR.style.top = `${posY - CURSOR.offsetHeight / 2}px`;
+                CURSOR.style.left = `${posX - CURSOR.offsetWidth / 2}px`;
+            };
+            document.addEventListener("mousemove", setCursorPos);
+
+            const setCursorHover = () => (CURSOR.style.transform = "scale(2.5)");
+            const removeCursorHover = () => (CURSOR.style.transform = "");
+            LINKS.forEach((link) => link.addEventListener("mouseover", setCursorHover));
+            LINKS.forEach((link) =>
+                link.addEventListener("mouseleave", removeCursorHover)
+            );
+        })();
+
+    </script>
+</body>
+
+</html>
